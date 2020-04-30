@@ -52,9 +52,12 @@ Reference: https://www.howtogeek.com/117435/htg-explains-the-linux-directory-str
  
 ## VIM: **Vi** i**M**proved
 
+VIM cheat sheet: https://devhints.io/vim
+
 | Left | Down | Up | Right |
 |---|---|---|---|
 | H | J | K | L |
+
 Note: you can also use the arrow keys
 
 | Command | Action |
@@ -157,6 +160,9 @@ Usage: `grep <term> <file>` or `grep <options> <regex> <file>`
 | -q | quiet mode |
 
 ## Regular Expressions
+
+Regex cheat sheet: https://media.cheatography.com/storage/thumb/davechild_regular-expressions.750.jpg
+
 | Symbol | Purpose |
 |---|---|
 | ^ | start of a string |
