@@ -66,7 +66,7 @@ Note: you can also use the arrow keys
 | % | jumps to match paren |
 | :noh | removes highlighting |
 | i | insert at marker |
-| I | insert at end of line |
+| I | insert at beginning of line |
 | a | insert ahead of marker |
 | A | insert at end of line |
 | x | delete a character |
@@ -149,14 +149,14 @@ e.g., `chmod g+w <file>` adds write permissions to the group
 Usage: `grep <term> <file>` or `grep <options> <regex> <file>`
 | Flag | Action |
 |---|---|
-| -r | recursive search for a term in all files at this level and below |
 | -i | case insensitive |
 | -w | whole word search |
+| -r | recursive search for a term in all files at this level and below |
 | -v | inverted search; print all lines except the search term |
 | -B`#` | display `#` lines before the match |
 | -A`#` | display `#` lines after the match |
 | -C`#` | display `#` lines both before and after the match |
-| -H | print the filename for each match |
+| -c | display the number of times the match was found |
 | -q | quiet mode |
 
 ## Regular Expressions
@@ -184,7 +184,7 @@ Regex cheat sheet: https://media.cheatography.com/storage/thumb/davechild_regula
 | {`<num1>`, `<num2>`} | matches numbers through num1 to num2 inclusive |
 
 ## Finding
-Usage: `find <options> <starting path> <expression>`
+Usage: `find <starting path> <options>  <expression>`
 
 | Flag | Action |
 |---|---|
@@ -213,8 +213,8 @@ Usage: `find <options> <starting path> <expression>`
 ## Jobs
 | Command | Action |
 |---|---|
-| Ctrl-z | Sleep a process |
 | jobs | prints a list of the currently running jobs and their status |
+| Ctrl-z | Sleep a process |
 | fg `%<num>` | move that job number to the foreground |
 | bg `%<num>` | move that job number to the background |
 | kill `%<num>` | kill that job number |
@@ -226,3 +226,10 @@ Aliases are shortcuts that you can create yourself.
 | alias <alias_name>=`"<command>"` | Creates a temporary alias |
 | source ~/.bashrc | Source loads functions into the shell |
 | unalias <alias_name> | Temporarily removes the alias |
+
+## Environment Variables
+KEY=value
+<br>KEY=value1:value2
+<br>`printenv` will print out current environment variables
+
+Note: environment variables are local to the shell until saved and made global
