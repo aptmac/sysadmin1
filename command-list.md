@@ -1,34 +1,6 @@
 # Linux Environment & Tooling: Command List
 
-## Introduction to the Linux File System
-
-Reference: https://www.howtogeek.com/117435/htg-explains-the-linux-directory-structure-explained/
-
-| Folder | Purpose  |
-|---|---|
-| / | root directory |
-| bin | essential user binaries |
-| boot | static boot files |
-| dev | device files |
-| etc | configuration files |
-| home | home folders |
-| ~ | your user home directory |
-| lib | essential shared libraries |
-| lost+found| recovered files |
-| media | removable media |
-| mnt | temporary mount points |
-| opt | optional packages |
-| proc | kernel & process files|
-| root | root home directory |
-| run | application state files |
-| sbin | system administration binaries |
-| srv | service data |
-| sys | system and kernel information |
-| tmp | temporary files |
-| usr | user binaries & read-only data |
-| var | variable data files |
-
-## Navigation
+## Navigation and File Utilities
 
 | Command| Action |
 |---|---|
@@ -52,7 +24,7 @@ Reference: https://www.howtogeek.com/117435/htg-explains-the-linux-directory-str
  
 ## VIM: **Vi** i**M**proved
 
-VIM cheat sheet: https://devhints.io/vim
+VIM cheat sheet: https://rumorscity.com/wp-content/uploads/2014/08/10-Best-VIM-Cheat-Sheet-01.jpg
 
 | Left | Down | Up | Right |
 |---|---|---|---|
@@ -62,17 +34,20 @@ Note: you can also use the arrow keys
 
 | Command | Action |
 |---|---|
-| : | jump to line number |
-| % | jumps to match paren |
+| ESC | enter command mode | 
+| :`<number>` | jump to line number |
+| /`<text>` or ?`<text>` | search for text in the document |
+| n | (search) find next |
+| N | (search) find previous |
 | :noh | removes highlighting |
 | i | insert at marker |
 | I | insert at beginning of line |
 | a | insert ahead of marker |
 | A | insert at end of line |
 | x | delete a character |
-| d | to delete a line |
+| d | to (cut) delete a line |
 | #d | to delete # number of lines |
-| y | cut |
+| y | yank (copy) |
 | p | paste |
 | u | undo |
 | :q | quit |
@@ -80,6 +55,8 @@ Note: you can also use the arrow keys
 | :wq | save and quit |
 | :x | save and quit |
 | :q! | quit without saving |
+
+Exercise: open the supplied grepfile with VIM and practice navigating the file and making adjustments in both command and input mode. Practice exiting and saving.
 
 ## Input & Output
 
@@ -95,13 +72,13 @@ Note: you can also use the arrow keys
 | (stderr) `2>` and `2>>` | overwrite and append stderr | 
 | (pipes) `|` | used to redirect intup to another program 
 
-## Folders, Files, and Permissions
+## Permissions
 
 Permissions 
 
 Example: `-rwxr-xr-x`
 <br>Left most column is the type: `-`
-<br>Next column is the permissions for the owner: `wrx`
+<br>Next column is the permissions for the owner: `rwx`
 <br>Next column is the permissions for the users in the file's group: `r-x`
 <br>Next column is the permissions for everyone else: `r-x`
 
@@ -121,7 +98,20 @@ Example: `-rwxr-xr-x`
 
 e.g., `chmod g+w <file>` adds write permissions to the group
 
-## General Bash Completion Shortcuts
+<b>Also,</b> number notation:
+
+Usage: `chmod <value> <files>`
+
+4 = r (Read)<br>
+2 = w (Write)<br>
+1 = x (execute)<br>
+
+e.g.,<br>
+"142" is --x/r--/-w-<br>
+"724" is rwx/-w-/r--<br>
+"777" is rwx/rwx/rwx
+
+## Bash shortcuts, and useful other useful shell commands
 | Shortcut | Action |
 |---|---|
 | Ctrl-k | delete anything after the cursor |
@@ -138,8 +128,7 @@ e.g., `chmod g+w <file>` adds write permissions to the group
 | !abc | executes the last command with abc |
 | !abc:p | prints that last command |
 | !$ | last argument of that last command |
-| Alt-. | inserts the result of the last command |
-| && | will proceed with the next command if the first one succeeds |
+| && | will proceed with the next command if the first one succeeds (short-circuit) |
 | ; | will proceed in all cases |
 | man `<command>` | will display the documentation belonging to the command |
 | man -k | to search for a man page |
@@ -147,19 +136,18 @@ e.g., `chmod g+w <file>` adds write permissions to the group
 ## GREP: **G**lobally search a **R**egular **E**xpression and **P**rint
 
 Usage: `grep <term> <file>` or `grep <options> <regex> <file>`
-| Flag | Action |
-|---|---|
-| -i | case insensitive |
-| -w | whole word search |
-| -r | recursive search for a term in all files at this level and below |
-| -v | inverted search; print all lines except the search term |
-| -B`#` | display `#` lines before the match |
-| -A`#` | display `#` lines after the match |
-| -C`#` | display `#` lines both before and after the match |
-| -c | display the number of times the match was found |
-| -q | quiet mode |
+| Flag | Action | Example |
+|---|---|---|
+| -i | case insensitive | `grep -i "abcd" grepfile` |
+| -w | whole word search | `grep -w "test" grepfile` |
+| -r | recursive search for a term in all files at this level and below | `grep -r "abcd" ~` |
+| -v | inverted search; print all lines except the search term | `grep -v "test" grepfile` |
+| -B`#` | display `#` lines before the match | `grep -B3 "test" grepfile` |
+| -A`#` | display `#` lines after the match | `grep -A3 "test" grepfile` |
+| -C`#` | display `#` lines both before and after the match | `grep -C3 "test" grepfile` |
+| -c | display the number of times the match was found | `grep -c "test" grepfile` |
 
-## Regular Expressions
+## Regular Expressions Primer
 
 Regex cheat sheet: https://media.cheatography.com/storage/thumb/davechild_regular-expressions.750.jpg
 
@@ -171,7 +159,7 @@ Regex cheat sheet: https://media.cheatography.com/storage/thumb/davechild_regula
 | \d | digit |
 | \w | word |
 | . | any character except newline |
-| `(a|b)` | a or b |
+| (a\|b) | a or b |
 | [abc] | Range; a, b, or c |
 | [^abc] | not (a or b or c) |
 | [a-q] | lower case letter from a to q |
@@ -183,7 +171,14 @@ Regex cheat sheet: https://media.cheatography.com/storage/thumb/davechild_regula
 | {`<num>`,} | `<num>` or more |
 | {`<num1>`, `<num2>`} | matches numbers through num1 to num2 inclusive |
 
-## Finding
+Using the following commands with grep, what would you expect grep to find?
+
+`grep "^ABC" grepfile`<br>
+`grep "[abc]\{2,\}" grepfile`<br>
+`grep "[A-P][a-d]?" grepfile`<br>
+`grep "\s(L|w)\w" grepfile`
+
+## Finding Files
 Usage: `find <starting path> <options>  <expression>`
 
 | Flag | Action |
@@ -196,12 +191,13 @@ Usage: `find <starting path> <options>  <expression>`
 | -exec | can execute a search for each result |
 
 ## Process Management
+
 | Command | Action |
 |---|---|
 | ps -a | prints out all active processes |
 | ps -x | prints out all processes owned by you |
 | ps -f | shows full-format listing |
-| ps aux| shows all processes on the system |
+| ps aux | shows all processes on the system |
 | ps -C `<name>` | shows processes by the executable name |
 | ps -e --forest | shows a process tree |
 | ps -eH | shows a simple tree format|
@@ -215,9 +211,9 @@ Usage: `find <starting path> <options>  <expression>`
 |---|---|
 | jobs | prints a list of the currently running jobs and their status |
 | Ctrl-z | Sleep a process |
-| fg `%<num>` | move that job number to the foreground |
-| bg `%<num>` | move that job number to the background |
-| kill `%<num>` | kill that job number |
+| fg `<num>` | move that job `num` to the foreground |
+| bg `<num>` | move that job `num` to the background |
+| kill `<num>` | kill that job `num` |
 
 ## Aliases
 Aliases are shortcuts that you can create yourself.
@@ -233,3 +229,36 @@ KEY=value
 <br>`printenv` will print out current environment variables
 
 Note: environment variables are local to the shell until saved and made global
+
+<b>PATH</b>
+<br>Environment variable that tells the shell which directories to search for executable files. A user's PATH consists of a series of colon-separated paths (absolute). Can add to the path by using:
+
+export PATH=$PATH:/new/path
+
+## Introduction to the Linux File System
+
+Reference: https://www.howtogeek.com/117435/htg-explains-the-linux-directory-structure-explained/
+
+| Folder | Purpose  |
+|---|---|
+| / | root directory |
+| bin | essential user binaries |
+| boot | static boot files |
+| dev | device files |
+| etc | configuration files |
+| home | home folders |
+| ~ | user home directory (of logged in user) |
+| lib | essential shared libraries |
+| lost+found| recovered files |
+| media | removable media |
+| mnt | temporary mount points |
+| opt | optional packages |
+| proc | kernel & process files|
+| root | root home directory |
+| run | application state files |
+| sbin | system administration binaries |
+| srv | service data |
+| sys | system and kernel information |
+| tmp | temporary files |
+| usr | user binaries & read-only data |
+| var | variable data files |
