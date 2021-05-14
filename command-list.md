@@ -190,6 +190,26 @@ Usage: `find <starting path> <options>  <expression>`
 | -type d | specifies only directories to be searched |
 | -exec | can execute a search for each result |
 
+## Aliases
+Aliases are shortcuts that you can create yourself.
+| Command | Action  |
+|---|---|
+| alias <alias_name>=`"<command>"` | Creates a temporary alias |
+| source ~/.bashrc | Source loads functions into the shell |
+| unalias <alias_name> | Temporarily removes the alias |
+
+## Environment Variables
+KEY=value
+<br>KEY=value1:value2
+<br>`printenv` will print out current environment variables
+
+Note: environment variables are local to the shell until saved and made global
+
+<b>PATH</b>
+<br>Environment variable that tells the shell which directories to search for executable files. A user's PATH consists of a series of colon-separated paths (absolute). Can add to the path by using:
+
+export PATH=$PATH:/new/path
+
 ## Process Management
 
 | Command | Action |
@@ -214,51 +234,3 @@ Usage: `find <starting path> <options>  <expression>`
 | fg `<num>` | move that job `num` to the foreground |
 | bg `<num>` | move that job `num` to the background |
 | kill `<num>` | kill that job `num` |
-
-## Aliases
-Aliases are shortcuts that you can create yourself.
-| Command | Action  |
-|---|---|
-| alias <alias_name>=`"<command>"` | Creates a temporary alias |
-| source ~/.bashrc | Source loads functions into the shell |
-| unalias <alias_name> | Temporarily removes the alias |
-
-## Environment Variables
-KEY=value
-<br>KEY=value1:value2
-<br>`printenv` will print out current environment variables
-
-Note: environment variables are local to the shell until saved and made global
-
-<b>PATH</b>
-<br>Environment variable that tells the shell which directories to search for executable files. A user's PATH consists of a series of colon-separated paths (absolute). Can add to the path by using:
-
-export PATH=$PATH:/new/path
-
-## Introduction to the Linux File System
-
-Reference: https://www.howtogeek.com/117435/htg-explains-the-linux-directory-structure-explained/
-
-| Folder | Purpose  |
-|---|---|
-| / | root directory |
-| bin | essential user binaries |
-| boot | static boot files |
-| dev | device files |
-| etc | configuration files |
-| home | home folders |
-| ~ | user home directory (of logged in user) |
-| lib | essential shared libraries |
-| lost+found| recovered files |
-| media | removable media |
-| mnt | temporary mount points |
-| opt | optional packages |
-| proc | kernel & process files|
-| root | root home directory |
-| run | application state files |
-| sbin | system administration binaries |
-| srv | service data |
-| sys | system and kernel information |
-| tmp | temporary files |
-| usr | user binaries & read-only data |
-| var | variable data files |
